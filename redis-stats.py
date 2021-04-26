@@ -5,7 +5,9 @@ import redis
 from optparse import OptionParser
 
 stats = {'total_connections_received': 0, 'connected_clients': 0, 'used_memory': 0, 'total_commands_processed': 0, 
-         'keys': 0, 'expires': 0}
+         'keys': 0, 'expires': 0,
+         'used_memory_rss': 0, 'used_memory_peak': 0}
+         # mem_fragmentation_ratio=used_memory_rss/used_memory,当mem_fragmentation_ratio <1 时，说明used_memory > used_memory_rss，这时Redis已经在使用SWAP，运行性能会受很大影响。
 
 parser = OptionParser(usage="usage: %prog [-h] [-p PORT] [-d DB] [-a AUTH_PASSWORD ] HOSTNAME ...")
 parser.set_defaults(port = "6379")
